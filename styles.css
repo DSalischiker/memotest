@@ -1,7 +1,6 @@
 .contenedor{
  width: 70%;
  height: 0 auto;
- border:1px solid black;
  margin: 0 auto;
  text-align:center;
  font-size: 25px;
@@ -14,10 +13,17 @@
  font-family: 'nunito', sans-serif;
  background-color: #446f71;
  color: white;
+ -webkit-box-shadow: 0px 2px 10px -1px rgba(0,0,0,0.75);
+ -moz-box-shadow: 0px 2px 10px -1px rgba(0,0,0,0.75);
+ box-shadow: 0px 2px 10px -1px rgba(0,0,0,0.75);
 }
 
 #titulo{
     text-align: center;
     font-family: 'nunito', sans-serif;
     font-weight: 800;
+    color: azure;
+}
+body{
+    background-color: #599093;
 }
