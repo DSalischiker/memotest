@@ -10,28 +10,14 @@
 
 <body>
     <h1 id="titulo">Memotest</h1>
-    <select id="selectSize" name="selectSize" onchange="drawHTMLBoard(this)">
-        <option value="4">4x4</option>
-        <option value="5">5x5</option>
-        <option value="6">6x6</option>
-    </select>
-    <div class="container">
-        <!-- <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
-        <div>9</div>
-        <div>10</div>
-        <div>11</div>
-        <div>12</div>
-        <div>13</div>
-        <div>14</div>
-        <div>15</div>
-        <div>16</div> -->
+    <div id="maincontainer">
+        <select class="select-css" id="selectSize" name="selectSize" onchange="drawHTMLBoard(this)">
+            <option value="4">4x4</option>
+            <option value="5">5x5</option>
+            <option value="6">6x6</option>
+        </select>
+        <div class="container">
+        </div>
     </div>
     <script type="text/javascript" src="assets/app.js"></script>
 
