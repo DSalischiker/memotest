@@ -1,0 +1,23 @@
+.contenedor{
+ width: 70%;
+ height: 0 auto;
+ border:1px solid black;
+ margin: 0 auto;
+ text-align:center;
+ font-size: 25px;
+ font-family: sans-serif;
+ display: grid;
+ grid-template-columns: 25% 25% 25% 25%;
+ grid-template-rows: 50px 50px 50px;
+ padding: 20px;
+ border-radius: 3em;
+ font-family: 'nunito', sans-serif;
+ background-color: #446f71;
+ color: white;
+}
+
+#titulo{
+    text-align: center;
+    font-family: 'nunito', sans-serif;
+    font-weight: 800;
+}
