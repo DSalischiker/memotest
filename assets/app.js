@@ -14,3 +14,9 @@ function drawHTMLBoard(selectedSize) {
         container.append("<div>" + i + "</div>");
     }
 }
+
+var tablero = [];
+
+for( i=0; i < selectedSize.value; i++){
+    tablero[i] = new Array(selectedSize.value);
+};
