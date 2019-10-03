@@ -44,7 +44,7 @@ body {
 
 .container div:hover {
     background-color: #599093;
-    
+
 }
 
 img {
@@ -85,7 +85,7 @@ img {
     text-align: center;
     outline: none;
     transition: 0.3s;
-    
+
 }
 
 
@@ -127,10 +127,11 @@ img {
     margin-top: 1em;
 }
 
-#BotonReiniciar:hover{
-    background-color:#b1d9d9;
-    
-#ad{
+#BotonReiniciar:hover {
+    background-color: #b1d9d9;
+}
+
+#ad {
     text-align: center;
     color: azure;
     font-family: nunito;
