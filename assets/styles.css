@@ -38,10 +38,13 @@ body {
     height: 100%;
     text-align: center;
     border-radius: 0.5em;
+    transition: 0.4s;
+    cursor: pointer;
 }
 
 .container div:hover {
     background-color: #599093;
+    
 }
 
 img {
@@ -126,4 +129,10 @@ img {
 
 #BotonReiniciar:hover{
     background-color:#b1d9d9;
+    
+#ad{
+    text-align: center;
+    color: azure;
+    font-family: nunito;
+    padding: 10px;
 }
