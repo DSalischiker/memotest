@@ -1,3 +1,4 @@
+
 body {
     background-color: #599093;
     width: 98vw;
@@ -10,6 +11,7 @@ body {
     font-family: 'nunito', sans-serif;
     font-weight: 800;
     color: azure;
+    margin:0 auto;
 }
 
 .container {
