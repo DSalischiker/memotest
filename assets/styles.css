@@ -57,8 +57,6 @@ img {
     margin: 0 auto;
 }
 
-
-
 .select-css {
     display: block;
     font-size: 16px;
@@ -70,7 +68,7 @@ img {
     width: 20%;
     max-width: 100%;
     box-sizing: border-box;
-    margin: 0 auto 20px;
+    margin: 20px;
     border: 1px solid #aaa;
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
     border-radius: .5em;
@@ -88,8 +86,6 @@ img {
     transition: 0.3s;
 
 }
-
-
 
 .select-css::-ms-expand {
     display: none;
@@ -121,11 +117,17 @@ img {
     width: 20%;
     max-width: 100%;
     box-sizing: border-box;
-    margin: 0 auto 20px;
+    margin: 20px;
     border: 1px solid #aaa;
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
     border-radius: .5em;
-    margin-top: 1em;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    text-align: center;
+    outline: none;
+    transition: 0.3s;
 }
 
 .container div {
@@ -141,4 +143,11 @@ img {
     color: azure;
     font-family: nunito;
     padding: 10px;
+}
+
+#alinear {
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+    justify-content: center;
 }
