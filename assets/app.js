@@ -30,21 +30,30 @@ function createLogicalBoard(boardSize) {
 }
 
 function setTilesLogicalBoard(boardSize, totalTiles) {
-    position = randomposition(boardSize);
-    for (let i = 0; i < totalTiles; i++) {
 
-        if (board[position[0]][position[1]] === "") {
-            board[position[0]][position[1]] = loadTile();
+    for (let i = 0; i < totalTiles; i++) {
+        //Look for two empty spaces and set the tile value for both of them (i)
+        position = null;
+        do {
+            position = randomposition(boardSize);
+            //Set i value for the random position
+            board[position[0]][position[1]] = i;
             console.log("Posición " + position + " = " + board[position[0]][position[1]]);
-        }
+        } while (board[position[0]][position[1]] === "");
+        position = null;
+        do {
+            position = randomposition(boardSize);
+            //Set i value for the random position
+            board[position[0]][position[1]] = i;
+            console.log("Posición " + position + " = " + board[position[0]][position[1]]);
+        } while (board[position[0]][position[1]] === "");
+
     }
 }
 
 function randomposition(boardSize) {
-    /* return Math.floor(Math.random() * (totalTiles)); */
     var position = Math.floor(Math.random() * (boardSize));
     position = position + "" + Math.floor(Math.random() * (boardSize));
-    console.log(position);
     return position;
 }
 

@@ -127,6 +127,10 @@ img {
     margin-top: 1em;
 }
 
+.container div {
+    border: 1px solid #b1d9d9;
+}
+
 #BotonReiniciar:hover {
     background-color: #b1d9d9;
 }
