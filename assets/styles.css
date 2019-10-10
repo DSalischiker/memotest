@@ -1,7 +1,7 @@
 body {
     background-color: #599093;
     width: 98vw;
-    background-image: url(file:///C:/Users/Usuario/Documents/GitHub/memotest/assets/img/fondo.jpg);
+    background-image: url(./img/fondo.jpg);
     background-size: cover;
 }
 
