@@ -1,62 +1,91 @@
-var board = [];
 //Function that creates the board according to the size the user selected
+var board = [];
+
 function drawBoard(selectedSize) {
+    //asigna a la variable boardsize la longitud del tablero elegida por el usuario
     var boardSize = selectedSize.value;
-    var totalTiles = boardSize * boardSize;
+    //Llama a función para crear el tablero lógico (la matriz)
     createLogicalBoard(boardSize);
-    setTilesLogicalBoard(boardSize, totalTiles);
+    //Llama a función para asignar las fichas al tablero lógico
+    setTilesLogicalBoard(boardSize);
+    //Creo dinámicamente HTML con los divs necesarios según tamaño del tablero
     var container = $(".container");
     container.empty();
-
     container.css({
         "grid-template-columns": "repeat(" + boardSize + ", 1fr)",
         "grid-template-rows": "repeat(" + boardSize + ",1fr)"
     });
-    for (let i = 0; i < totalTiles; i++) {
-        container.append("<div id='tile" + i + "'>" + i + "</div>");
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+            var tile = i + "" + j;
+            //El ID que le asigna es la posición que tiene en la matriz (row(i) y column(j)) y el inner text es la ficha que le asignó el random
+            container.append("<div id='" + tile + "'>" + board[i][j] + "</div>");
+        }
     }
-    /* console.log(randomposition(quantTiles)); */
+
 }
 
 function createLogicalBoard(boardSize) {
-
-    for (var i = 0; i < boardSize; i++) {
-        board[i] = [];
-        for (var j = 0; j < boardSize; j++) {
-            board[i][j] = "";
+    //Creates matrix with size choosed by user
+    for (let i = 0; i < boardSize; i++) {
+        board.push([]);
+        for (let j = 0; j < boardSize; j++) {
+            board[i].push("");
         }
     }
     console.log(board);
 }
 
-function setTilesLogicalBoard(boardSize, totalTiles) {
-
-    for (let i = 0; i < totalTiles; i++) {
-        //Look for two empty spaces and set the tile value for both of them (i)
-        position = null;
-        do {
-            position = randomposition(boardSize);
-            //Set i value for the random position
-            board[position[0]][position[1]] = i;
-            console.log("Posición " + position + " = " + board[position[0]][position[1]]);
-        } while (board[position[0]][position[1]] === "");
-        position = null;
-        do {
-            position = randomposition(boardSize);
-            //Set i value for the random position
-            board[position[0]][position[1]] = i;
-            console.log("Posición " + position + " = " + board[position[0]][position[1]]);
-        } while (board[position[0]][position[1]] === "");
-
+function setTilesLogicalBoard(boardSize) {
+    //Crea array con todas las posiciones posibles y las mezcla
+    var positions = createPositionsArray(boardSize);
+    //inicializa un contador interno y la variable que va a tener la ficha a asignar
+    var contInterno = 0;
+    var ficha = 0;
+    for (let i = 0; i < positions.length; i++) {
+        //Recorre todo el array de posiciones. Asigna el valor de la variable ficha a la posición i
+        board[positions[i].row][positions[i].col] = ficha;
+        //aumenta contador interno
+        contInterno++;
+        //Si es 2 quiere decir que ya puso el mismo valor ficha en dos posiciones (el par)
+        if (contInterno === 2) {
+            //entonces reinicia el contador interno y aumenta en uno la ficha
+            contInterno = 0;
+            ficha++;
+        }
     }
 }
 
-function randomposition(boardSize) {
-    var position = Math.floor(Math.random() * (boardSize));
-    position = position + "" + Math.floor(Math.random() * (boardSize));
-    return position;
+function createPositionsArray(boardSize) {
+    var positions = [];
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
+            //asigna un objeto con row i y col j a cada posición del array
+            positions.push({
+                row: i,
+                col: j
+            });
+        }
+    }
+    //las mezcla
+    shuffle(positions);
+    return positions;
 }
 
-function loadTile() {
-    return Math.floor(Math.random() * (18 - 1)) + 1;
+function shuffle(positions) {
+    //Función para mezclar array
+    var currentIndex = positions.length;
+    var temporaryValue, randomIndex;
+    //While there remain elements to shuffle...
+    while (0 != currentIndex) {
+        //Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        //And swap it with the current element
+        temporaryValue = positions[currentIndex];
+        positions[currentIndex] = positions[randomIndex];
+        positions[randomIndex] = temporaryValue;
+    }
+    return positions;
 }
