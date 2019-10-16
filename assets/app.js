@@ -1,6 +1,8 @@
 //Function that creates the board according to the size the user selected
 var board = [];
 
+var click1, click2;
+
 function drawBoard(selectedSize) {
     //asigna a la variable boardsize la longitud del tablero elegida por el usuario
     var boardSize = selectedSize.value;
@@ -19,14 +21,29 @@ function drawBoard(selectedSize) {
         for (let j = 0; j < boardSize; j++) {
             var tile = i + "" + j;
             //El ID que le asigna es la posición que tiene en la matriz (row(i) y column(j)) y el inner text es la ficha que le asignó el random
-            container.append("<div id='" + tile + "' onclick='clickTile(this)'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>");
+            container.append("<div id='" + tile + "' onclick='clickTile(" + board[i][j].ficha + ")'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>");
         }
     }
 
 }
 
-function clickTile(div) {
-    console.log("Clickeé la ficha " + div);
+function clickTile(ficha) {
+    console.log("Clickeé la ficha " + ficha);
+    if (click1 == null) {
+        console.log("entré al if");
+        click1 = ficha;
+    } else {
+        click2 = ficha;
+        if (click1 === click2) {
+            console.log("IGUALES");
+            click1 = null;
+            click2 = null;
+        } else {
+            console.log("DISTINTAS");
+            click1 = null;
+            click2 = null;
+        }
+    }
 }
 
 function createLogicalBoard(boardSize) {
