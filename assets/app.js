@@ -19,10 +19,14 @@ function drawBoard(selectedSize) {
         for (let j = 0; j < boardSize; j++) {
             var tile = i + "" + j;
             //El ID que le asigna es la posición que tiene en la matriz (row(i) y column(j)) y el inner text es la ficha que le asignó el random
-            container.append("<div id='" + tile + "'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>");
+            container.append("<div id='" + tile + "' onclick='clickTile(this)'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>");
         }
     }
 
+}
+
+function clickTile(div) {
+    console.log("Clickeé la ficha " + div);
 }
 
 function createLogicalBoard(boardSize) {
