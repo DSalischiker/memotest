@@ -1,4 +1,3 @@
-
 body {
     background-color: #599093;
     width: 98vw;
@@ -11,7 +10,7 @@ body {
     font-family: 'nunito', sans-serif;
     font-weight: 800;
     color: azure;
-    margin:0 auto;
+    margin: 0 auto;
 }
 
 .container {
@@ -134,6 +133,12 @@ img {
 
 .container div {
     border: 1px solid #b1d9d9;
+}
+
+.container div img {
+    width: 80%;
+    height: auto;
+    overflow: hidden;
 }
 
 #BotonReiniciar:hover {

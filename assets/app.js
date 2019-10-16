@@ -19,7 +19,7 @@ function drawBoard(selectedSize) {
         for (let j = 0; j < boardSize; j++) {
             var tile = i + "" + j;
             //El ID que le asigna es la posición que tiene en la matriz (row(i) y column(j)) y el inner text es la ficha que le asignó el random
-            container.append("<div id='" + tile + "'>" + board[i][j].ficha + "</div>");
+            container.append("<div id='" + tile + "'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>");
         }
     }
 
@@ -47,7 +47,7 @@ function setTilesLogicalBoard(boardSize) {
         board[positions[i].row][positions[i].col] = {
             ficha: ficha, //QUE FICHA ES
             estado: 0, //YA FUE ENCONTRADA LA PAREJA Y POR QUE JUGADOR --> 0 (no fue encontrada), 1 (fue encontrada por JUG1, 2 (FUE ENCONTRADA POR JUG2))
-            imagen: "", //SRC DE LA IMG
+            imagen: "./assets/img/" + ficha + ".jpg", //SRC DE LA IMG
             clicked: false //FUE CLICKEADA TRUE/FALSE
         };
         //aumenta contador interno
