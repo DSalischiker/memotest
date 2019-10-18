@@ -1,7 +1,7 @@
 //Function that creates the board according to the size the user selected
 var board = [];
 
-var click1, click2;
+var click1, click2, div1, div2;
 
 function drawBoard(selectedSize) {
     //asigna a la variable boardsize la longitud del tablero elegida por el usuario
@@ -21,27 +21,38 @@ function drawBoard(selectedSize) {
         for (let j = 0; j < boardSize; j++) {
             var tile = i + "" + j;
             //El ID que le asigna es la posición que tiene en la matriz (row(i) y column(j)) y el inner text es la ficha que le asignó el random
-            container.append("<div id='" + tile + "' onclick='clickTile(" + board[i][j].ficha + ")'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>");
+            container.append("<div id='" + tile + "' onclick='clickTile(" + JSON.stringify(tile) + ")'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>");
         }
     }
 
 }
 
-function clickTile(ficha) {
-    console.log("Clickeé la ficha " + ficha);
+function clickTile(divId) {
+    console.log("Clickeé el div " + divId + " y es de tipo: " + typeof (divId));
+    var ficha = board[divId[0]][divId[1]];
+    document.getElementById(divId).removeAttribute("onClick");
+    console.log("ficha: " + ficha.valor);
     if (click1 == null) {
         console.log("entré al if");
-        click1 = ficha;
+        click1 = ficha.valor;
+        div1 = divId;
     } else {
-        click2 = ficha;
+        click2 = ficha.valor;
+        div2 = divId;
         if (click1 === click2) {
             console.log("IGUALES");
             click1 = null;
             click2 = null;
         } else {
             console.log("DISTINTAS");
+            console.log("div es de tipo: " + typeof (div1));
+            document.getElementById(div1).setAttribute("onClick", "clickTile('" + div1 + "')");
+            document.getElementById(div2).setAttribute("onClick", "clickTile('" + div2 + "')");
             click1 = null;
             click2 = null;
+            div1 = null;
+            div2 = null;
+            ficha = null;
         }
     }
 }
@@ -66,7 +77,7 @@ function setTilesLogicalBoard(boardSize) {
     for (let i = 0; i < positions.length; i++) {
         //Recorre todo el array de posiciones. Asigna el valor de la variable ficha a la posición i
         board[positions[i].row][positions[i].col] = {
-            ficha: ficha, //QUE FICHA ES
+            valor: ficha, //QUE FICHA ES
             estado: 0, //YA FUE ENCONTRADA LA PAREJA Y POR QUE JUGADOR --> 0 (no fue encontrada), 1 (fue encontrada por JUG1, 2 (FUE ENCONTRADA POR JUG2))
             imagen: "./assets/img/" + ficha + ".jpg", //SRC DE LA IMG
             clicked: false //FUE CLICKEADA TRUE/FALSE
