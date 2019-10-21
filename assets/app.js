@@ -2,6 +2,8 @@
 var board = [];
 
 var click1, click2, div1, div2;
+var turno = true;
+var h3Turno = $("#turno");
 
 function drawBoard(selectedSize) {
     //asigna a la variable boardsize la longitud del tablero elegida por el usuario
@@ -24,7 +26,7 @@ function drawBoard(selectedSize) {
             container.append("<div id='" + tile + "' onclick='clickTile(" + JSON.stringify(tile) + ")'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>");
         }
     }
-
+    h3Turno.text("Turno: Jugador 1");
 }
 
 function clickTile(divId) {
@@ -43,9 +45,14 @@ function clickTile(divId) {
             console.log("IGUALES");
             click1 = null;
             click2 = null;
+            if (turno === true) {
+                //Se guarda qué jugador encontró el par
+                board[divId[0]][divId[1]].estado = 1; //JUGADOR 1
+            } else {
+                board[divId[0]][divId[1]].estado = 2; //JUGADOR 2
+            }
         } else {
             console.log("DISTINTAS");
-            console.log("div es de tipo: " + typeof (div1));
             document.getElementById(div1).setAttribute("onClick", "clickTile('" + div1 + "')");
             document.getElementById(div2).setAttribute("onClick", "clickTile('" + div2 + "')");
             click1 = null;
@@ -53,6 +60,13 @@ function clickTile(divId) {
             div1 = null;
             div2 = null;
             ficha = null;
+            turno = !turno;
+            if (turno === true) {
+                h3Turno.text("Turno: Jugador 1");
+            } else {
+                h3Turno.text("Turno: Jugador 2");
+            }
+
         }
     }
 }
@@ -80,7 +94,6 @@ function setTilesLogicalBoard(boardSize) {
             valor: ficha, //QUE FICHA ES
             estado: 0, //YA FUE ENCONTRADA LA PAREJA Y POR QUE JUGADOR --> 0 (no fue encontrada), 1 (fue encontrada por JUG1, 2 (FUE ENCONTRADA POR JUG2))
             imagen: "./assets/img/" + ficha + ".jpg", //SRC DE LA IMG
-            clicked: false //FUE CLICKEADA TRUE/FALSE
         };
         //aumenta contador interno
         contInterno++;

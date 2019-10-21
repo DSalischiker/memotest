@@ -141,6 +141,13 @@ img {
     overflow: hidden;
 }
 
+#turno {
+    color: white;
+    margin: 0 auto;
+    font-family: sans-serif;
+    text-align: center;
+}
+
 #BotonReiniciar:hover {
     background-color: #b1d9d9;
 }
