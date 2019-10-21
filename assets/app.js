@@ -5,6 +5,8 @@ var click1, click2, div1, div2;
 var turno = true;
 var h3Turno = $("#turno");
 
+var disableAll = false;
+
 function drawBoard(selectedSize) {
     //asigna a la variable boardsize la longitud del tablero elegida por el usuario
     var boardSize = selectedSize.value;
@@ -23,16 +25,21 @@ function drawBoard(selectedSize) {
         for (let j = 0; j < boardSize; j++) {
             var tile = i + "" + j;
             //El ID que le asigna es la posición que tiene en la matriz (row(i) y column(j)) y el inner text es la ficha que le asignó el random
-            container.append("<div id='" + tile + "' onclick='clickTile(" + JSON.stringify(tile) + ")'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>");
+            /* container.append("<div id='" + tile + "' onclick='clickTile(" + JSON.stringify(tile) + ")'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>"); */
+            container.append("<div id='" + tile + "' class='flip-box' onclick='clickTile(" + JSON.stringify(tile) + ")'><div class='flip-box-inner'><div class='flip-box-front'><img src='' alt=''/></div><div class='flip-box-back'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'></div></div></div>");
         }
     }
     h3Turno.text("Turno: Jugador 1");
 }
 
 function clickTile(divId) {
+    if (disableAll) {
+        return;
+    }
     console.log("Clickeé el div " + divId + " y es de tipo: " + typeof (divId));
     var ficha = board[divId[0]][divId[1]];
     document.getElementById(divId).removeAttribute("onClick");
+    document.getElementById(divId).setAttribute("class", "flip-box clicked");
     console.log("ficha: " + ficha.valor);
     if (click1 == null) {
         console.log("entré al if");
@@ -53,22 +60,37 @@ function clickTile(divId) {
             }
         } else {
             console.log("DISTINTAS");
+            disableAll = true;
+            setTimeout(function () {
+                console.log("timer!", div1, div2);
+                document.getElementById(div1).setAttribute("class", "flip-box");
+                document.getElementById(div2).setAttribute("class", "flip-box");
+                div1 = null;
+                div2 = null;
+                click1 = null;
+                click2 = null;
+                ficha = null;
+                turno = !turno;
+                if (turno === true) {
+                    h3Turno.text("Turno: Jugador 1");
+                } else {
+                    h3Turno.text("Turno: Jugador 2");
+                }
+                disableAll = false;
+            }, 1500);
             document.getElementById(div1).setAttribute("onClick", "clickTile('" + div1 + "')");
+            /* document.getElementById(div1).setAttribute("class", "flip-box"); */
             document.getElementById(div2).setAttribute("onClick", "clickTile('" + div2 + "')");
-            click1 = null;
-            click2 = null;
-            div1 = null;
-            div2 = null;
-            ficha = null;
-            turno = !turno;
-            if (turno === true) {
-                h3Turno.text("Turno: Jugador 1");
-            } else {
-                h3Turno.text("Turno: Jugador 2");
-            }
+            /* document.getElementById(div2).setAttribute("class", "flip-box"); */
 
         }
     }
+}
+
+function myTimer(div1, div2) {
+    console.log("timer!", div1, div2)
+    document.getElementById(div1).setAttribute("class", "flip-box");
+    document.getElementById(div2).setAttribute("class", "flip-box");
 }
 
 function createLogicalBoard(boardSize) {
