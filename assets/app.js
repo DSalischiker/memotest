@@ -1,15 +1,27 @@
 //Function that creates the board according to the size the user selected
 var board = [];
+//Variables declaration and initialization
+var totalPairs;
+var pairsFound = 0;
 
 var click1, click2, div1, div2;
 var turno = true;
 var h3Turno = $("#turno");
+
+var pairsP1 = 0;
+var pairsP2 = 0;
+var pointsP1 = 0;
+var pointsP2 = 0;
 
 var disableAll = false;
 
 function drawBoard(selectedSize) {
     //asigna a la variable boardsize la longitud del tablero elegida por el usuario
     var boardSize = selectedSize.value;
+    //Total pairs in the board
+    totalPairs = (boardSize * boardSize) / 2;
+    //disable the dropdown list so the board cannot be changed
+    selectedSize.disabled = true;
     //Llama a función para crear el tablero lógico (la matriz)
     createLogicalBoard(boardSize);
     //Llama a función para asignar las fichas al tablero lógico
@@ -29,66 +41,122 @@ function drawBoard(selectedSize) {
             container.append("<div id='" + tile + "' class='flip-box' onclick='clickTile(" + JSON.stringify(tile) + ")'><div class='flip-box-inner'><div class='flip-box-front'><img src='' alt=''/></div><div class='flip-box-back'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'></div></div></div>");
         }
     }
+    //Set the H3 for player's turn
     h3Turno.text("Turno: Jugador 1");
 }
 
 function clickTile(divId) {
+    //If a move is being made, no tiles can be clicked
     if (disableAll) {
         return;
     }
     console.log("Clickeé el div " + divId + " y es de tipo: " + typeof (divId));
+    //Assign the content of the tile to Ficha
     var ficha = board[divId[0]][divId[1]];
+    //Removes onClick attribute so it cannot be clicked again
     document.getElementById(divId).removeAttribute("onClick");
+    //Sets class clicked for the flip animation
     document.getElementById(divId).setAttribute("class", "flip-box clicked");
     console.log("ficha: " + ficha.valor);
     if (click1 == null) {
+        //If it's the first tile being clicked
         console.log("entré al if");
-        click1 = ficha.valor;
+        click1 = ficha;
         div1 = divId;
     } else {
-        click2 = ficha.valor;
+        //If it's the second one
+        click2 = ficha;
         div2 = divId;
-        if (click1 === click2) {
+        if (click1.valor === click2.valor) {
+            //if the two tiles are the same
             console.log("IGUALES");
-            click1 = null;
-            click2 = null;
+            pairsFound++;
+            console.log("Pares encontrados: " + pairsFound + ". Pares totales: " + totalPairs);
             if (turno === true) {
                 //Se guarda qué jugador encontró el par
-                board[divId[0]][divId[1]].estado = 1; //JUGADOR 1
+                click1.estado = 1; //JUGADOR 1
+                click2.estado = 1; //JUGADOR 1
             } else {
-                board[divId[0]][divId[1]].estado = 2; //JUGADOR 2
+                click1.estado = 2; //JUGADOR 2
+                click2.estado = 2; //JUGADOR 2
             }
+            //Resets "click" variables for another move
+            click1 = null;
+            click2 = null;
+            if (pairsFound === totalPairs) {
+                //If pairs Found = total Pairs it means the game is over
+                //PARTIDA TERMINADA
+                console.log("PARTIDA TERMINADA");
+                //Calls reviseBoard Function so it go around all the board and check scores
+                reviseBoard();
+            }
+
+
         } else {
+            //Tiles are not the same
             console.log("DISTINTAS");
+            //Disable clicks while animation returns tiles to inactivity state
             disableAll = true;
             setTimeout(function () {
+                //Set timer for the animation
                 console.log("timer!", div1, div2);
+                //returns tiles to inactivity state
                 document.getElementById(div1).setAttribute("class", "flip-box");
                 document.getElementById(div2).setAttribute("class", "flip-box");
+                //Resets variables for future clicks
                 div1 = null;
                 div2 = null;
                 click1 = null;
                 click2 = null;
                 ficha = null;
+                //change turn
                 turno = !turno;
                 if (turno === true) {
                     h3Turno.text("Turno: Jugador 1");
                 } else {
                     h3Turno.text("Turno: Jugador 2");
                 }
+                //Another click can be made cause animation is over
                 disableAll = false;
             }, 1500);
+            //reassigned onClick function
             document.getElementById(div1).setAttribute("onClick", "clickTile('" + div1 + "')");
-            /* document.getElementById(div1).setAttribute("class", "flip-box"); */
             document.getElementById(div2).setAttribute("onClick", "clickTile('" + div2 + "')");
-            /* document.getElementById(div2).setAttribute("class", "flip-box"); */
-
         }
     }
 }
 
+function reviseBoard() {
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+            switch (board[i][j].estado) {
+                case 0:
+
+                    break;
+                case 1:
+                    //I "estado" is 1, it means the tile was founded by Player 1
+                    pairsP1++;
+                    console.log("Pairs Player 1: " + pairsP1);
+                    break;
+                case 2:
+                    //I "estado" is 2, it means the tile was founded by Player 2
+                    pairsP2++;
+                    console.log("Pairs Player 2: " + pairsP2);
+                    break;
+            }
+        }
+    }
+    //Divide by 2 because it counts "estado" for every single tiles, not by pair
+    pairsP1 = pairsP1 / 2;
+    pairsP2 = pairsP2 / 2;
+    //Show on screen
+    $("#puntos_jug1").text(JSON.stringify(pairsP1));
+    $("#puntos_jug2").text(JSON.stringify(pairsP2));
+}
+
 function myTimer(div1, div2) {
     console.log("timer!", div1, div2)
+    //Takes out the clicked class for animation
     document.getElementById(div1).setAttribute("class", "flip-box");
     document.getElementById(div2).setAttribute("class", "flip-box");
 }

@@ -3,6 +3,7 @@ body {
     width: 98vw;
     background-image: url(./img/fondo.jpg);
     background-size: cover;
+    font-family: sans-serif;
 }
 
 #titulo {
@@ -211,4 +212,28 @@ img {
 .flip-box-back {
     color: white;
     transform: rotateY(180deg);
+}
+
+#flex-box {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jugador {
+    margin: 0 auto;
+    color: white;
+    font-size: 2em;
+}
+
+#puntos_jug1 {
+    text-align: center;
+    font-size: 3em;
+}
+
+#puntos_jug2 {
+    text-align: center;
+    font-size: 3em;
 }

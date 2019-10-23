@@ -12,6 +12,7 @@
 <body>
     <h1 id="titulo">Memotest</h1>
     <h3 id="turno">Turno: </h3>
+
     <div id="maincontainer">
         <div id="alinear">
             <select class="select-css" id="selectSize" name="selectSize" onchange="drawBoard(this)">
@@ -21,10 +22,19 @@
             </select>
             <button id="BotonReiniciar">Reiniciar</button>
         </div>
-        <div class="container">
+        <div id="flex-box">
+            <div id="jugador1" class="jugador">Jugador 1:
+                <h3 id="puntos_jug1">0</h3>
+            </div>
+            <div class="container">
+            </div>
+            <div id="jugador2" class="jugador"> Jugador 2:
+                <h3 id="puntos_jug2">0</h3>
+            </div>
         </div>
 
     </div>
+
     <address id="ad">Creado por Dieguito, Sabri, Marian y Alva</address>
     <script type="text/javascript" src="assets/app.js"></script>
 
