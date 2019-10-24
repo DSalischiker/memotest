@@ -40,7 +40,7 @@ function drawBoard(selectedSize) {
             var tile = i + "" + j;
             //El ID que le asigna es la posición que tiene en la matriz (row(i) y column(j)) y el inner text es la ficha que le asignó el random
             /* container.append("<div id='" + tile + "' onclick='clickTile(" + JSON.stringify(tile) + ")'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'/></div>"); */
-            container.append("<div id='" + tile + "' class='flip-box' onclick='clickTile(" + JSON.stringify(tile) + ")'><div class='flip-box-inner'><div class='flip-box-front'><img src='' alt=''/></div><div class='flip-box-back'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'></div></div></div>");
+            container.append("<div id='" + tile + "' class='flip-box' onmouseover='hover(" + JSON.stringify(tile) + ")' onclick='clickTile(" + JSON.stringify(tile) + ")'><div class='flip-box-inner'><div class='flip-box-front'><img src='' alt=''/></div><div class='flip-box-back'><img id='img" + board[i][j].ficha + "' src='" + board[i][j].imagen + "'></div></div></div>");
         }
     }
     //Set the H3 for player's turn
@@ -248,6 +248,17 @@ function shuffle(positions) {
         positions[randomIndex] = temporaryValue;
     }
     return positions;
+}
+
+function hover(id) {
+    //Add or removes a class depending on the player's turn for the space to show the color of the player to play
+    if (turno === true) {
+        document.getElementById(id).classList.toggle("turn2", false);
+        document.getElementById(id).classList.toggle("turn1", true);
+    } else {
+        document.getElementById(id).classList.toggle("turn1", false);
+        document.getElementById(id).classList.toggle("turn2", true);
+    }
 }
 
 function restart() {
