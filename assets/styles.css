@@ -133,10 +133,13 @@ img {
 
 .container div {
     border: 1px solid #b1d9d9;
+    align-items: center;
+    justify-content: center;
 }
 
 .container div img {
     width: 80%;
+    border-radius: .5em;
     height: auto;
     overflow: hidden;
 }
@@ -235,5 +238,73 @@ img {
 
 #puntos_jug2 {
     text-align: center;
+    font-size: 3em;
+}
+
+#winDiv {
+    z-index: 1;
+    top: 7%;
+    width: 44%;
+    height: 557px;
+    padding-bottom: 2em;
+    background-color: rgba(89, 144, 147, 0.815);
+    border-radius: 1em;
+    color: white;
+    position: absolute;
+    left: 28%;
+    -webkit-animation: fadein 2s;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+#winDiv h1 {
+    font-size: 3em;
+    position: absolute;
+    top: 26%;
+}
+
+#winDiv p {
+    padding: 19%;
+    text-align: center;
+}
+
+#winDiv span {
+    background-color: white;
+    color: rgb(73, 120, 122);
+    border-radius: 1em;
+    padding: 2em;
+    cursor: pointer;
+    position: absolute;
+    bottom: 17%;
+}
+
+#winDiv span:hover {
+    background-color: rgb(97, 186, 190);
+    color: white;
+}
+
+/* CLASSES */
+.dissapear {
+
+    display: none;
+}
+
+.appear {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+
     font-size: 3em;
 }

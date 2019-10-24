@@ -91,6 +91,21 @@ function clickTile(divId) {
                 //If pairs Found = total Pairs it means the game is over
                 //Game Over
                 console.log("PARTIDA TERMINADA");
+                var winDiv = document.getElementById("winDiv");
+                if (pairsP1 > pairsP2) {
+
+                    winDiv.innerHTML = '<h1>¡Ganó el jugador 1!</h1><span onclick="restart()">Empezar nueva partida</span>';
+                    winDiv.className = "appear";
+                } else {
+                    if (pairsP1 === pairsP2) {
+                        winDiv.innerHTML = '<h1>¡Empate!</h1><span onclick="restart()">Empezar nueva partida</span>';
+                        winDiv.className = "appear";
+                    } else {
+                        winDiv.innerHTML = '<h1>¡Ganó el jugador 2!</h1><span onclick="restart()">Empezar nueva partida</span>';
+                        winDiv.className = "appear";
+                    }
+
+                }
 
             }
 
@@ -248,15 +263,17 @@ function restart() {
     div1 = null;
     div2 = null;
     turno = true;
-    h3Turno = $("#turno");
 
     pairsP1 = 0;
     pairsP2 = 0;
     pointsP1 = 0;
     pointsP2 = 0;
-
+    $("#puntos_jug1").text(JSON.stringify(pairsP1));
+    $("#puntos_jug2").text(JSON.stringify(pairsP2));
+    $("#turno").text("Turno: Jugador 1");
     disableAll = false;
 
     $("#selectSize").prop('disabled', false);
     container.empty();
+    document.getElementById("winDiv").className = "dissapear";
 }
