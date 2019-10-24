@@ -15,21 +15,22 @@
 
     <div id="maincontainer">
         <div id="alinear">
-            <select class="select-css" id="selectSize" name="selectSize" onchange="drawBoard(this)">
+            <select class="select-css" id="selectSize" name="selectSize" onchange="drawBoard(this)">Seleccionar Tablero
+                <option disabled="disabled" selected="selected">Select an option.</option>
                 <option value="4">4x4</option>
                 <option value="5">5x5</option>
                 <option value="6">6x6</option>
             </select>
-            <button id="BotonReiniciar">Reiniciar</button>
+            <button id="BotonReiniciar" onclick="restart()">Reiniciar</button>
         </div>
         <div id="flex-box">
             <div id="jugador1" class="jugador">Jugador 1:
-                <h3 id="puntos_jug1">0</h3>
+                <p id="puntos_jug1">0</p>
             </div>
             <div class="container">
             </div>
             <div id="jugador2" class="jugador"> Jugador 2:
-                <h3 id="puntos_jug2">0</h3>
+                <p id="puntos_jug2">0</p>
             </div>
         </div>
 

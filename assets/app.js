@@ -15,11 +15,13 @@ var pointsP2 = 0;
 
 var disableAll = false;
 
+var container = $(".container");
+
 function drawBoard(selectedSize) {
     //asigna a la variable boardsize la longitud del tablero elegida por el usuario
     var boardSize = selectedSize.value;
     //Total pairs in the board
-    totalPairs = (boardSize * boardSize) / 2;
+    totalPairs = Math.floor((boardSize * boardSize) / 2);
     //disable the dropdown list so the board cannot be changed
     selectedSize.disabled = true;
     //Llama a función para crear el tablero lógico (la matriz)
@@ -27,7 +29,7 @@ function drawBoard(selectedSize) {
     //Llama a función para asignar las fichas al tablero lógico
     setTilesLogicalBoard(boardSize);
     //Creo dinámicamente HTML con los divs necesarios según tamaño del tablero
-    var container = $(".container");
+
     container.empty();
     container.css({
         "grid-template-columns": "repeat(" + boardSize + ", 1fr)",
@@ -80,15 +82,16 @@ function clickTile(divId) {
                 click1.estado = 2; //JUGADOR 2
                 click2.estado = 2; //JUGADOR 2
             }
+            //Calls reviseBoard Function so it go around all the board and check scores
+            reviseBoard();
             //Resets "click" variables for another move
             click1 = null;
             click2 = null;
             if (pairsFound === totalPairs) {
                 //If pairs Found = total Pairs it means the game is over
-                //PARTIDA TERMINADA
+                //Game Over
                 console.log("PARTIDA TERMINADA");
-                //Calls reviseBoard Function so it go around all the board and check scores
-                reviseBoard();
+
             }
 
 
@@ -116,7 +119,7 @@ function clickTile(divId) {
                 } else {
                     h3Turno.text("Turno: Jugador 2");
                 }
-                //Another click can be made cause animation is over
+                //Another click can be made because animation is over
                 disableAll = false;
             }, 1500);
             //reassigned onClick function
@@ -127,6 +130,8 @@ function clickTile(divId) {
 }
 
 function reviseBoard() {
+    pairsP1 = 0;
+    pairsP2 = 0;
     for (let i = 0; i < board.length; i++) {
         for (let j = 0; j < board[i].length; j++) {
             switch (board[i][j].estado) {
@@ -228,4 +233,30 @@ function shuffle(positions) {
         positions[randomIndex] = temporaryValue;
     }
     return positions;
+}
+
+function restart() {
+    console.log("REINICIO");
+    //Function that creates the board according to the size the user selected
+    board = [];
+    //Variables declaration and initialization
+    totalPairs;
+    pairsFound = 0;
+
+    click1 = null;
+    click2 = null;
+    div1 = null;
+    div2 = null;
+    turno = true;
+    h3Turno = $("#turno");
+
+    pairsP1 = 0;
+    pairsP2 = 0;
+    pointsP1 = 0;
+    pointsP2 = 0;
+
+    disableAll = false;
+
+    $("#selectSize").prop('disabled', false);
+    container.empty();
 }
