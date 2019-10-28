@@ -5,9 +5,18 @@ var totalPairs;
 var pairsFound = 0;
 
 var click1, click2, div1, div2;
-var turno = true;
-var h3Turno = $("#turno");
+var turn = true;
+var h3Turn = $("#turn");
 
+var turnsInARow = 0;
+var player1 = {
+    pairs: 0,
+    points: 0,
+};
+var player2 = {
+    pairs: 0,
+    points: 0,
+}
 var pairsP1 = 0;
 var pairsP2 = 0;
 var pointsP1 = 0;
@@ -44,13 +53,19 @@ function drawBoard(selectedSize) {
         }
     }
     //Set the H3 for player's turn
-    h3Turno.text("Turno: Jugador 1");
+    h3Turn.text("Turno: Jugador 1");
 }
 
 function clickTile(divId) {
     //If a move is being made, no tiles can be clicked
     if (disableAll) {
         return;
+    }
+    var playerTurn;
+    if (turn) {
+        playerTurn = player1;
+    } else {
+        playerTurn = player2;
     }
     console.log("Clickeé el div " + divId + " y es de tipo: " + typeof (divId));
     //Assign the content of the tile to Ficha
@@ -70,49 +85,46 @@ function clickTile(divId) {
         click2 = ficha;
         div2 = divId;
         if (click1.valor === click2.valor) {
+            turnsInARow++;
             //if the two tiles are the same
             console.log("IGUALES");
             pairsFound++;
             console.log("Pares encontrados: " + pairsFound + ". Pares totales: " + totalPairs);
-            if (turno === true) {
-                //Se guarda qué jugador encontró el par
-                click1.estado = 1; //JUGADOR 1
-                click2.estado = 1; //JUGADOR 1
-            } else {
-                click1.estado = 2; //JUGADOR 2
-                click2.estado = 2; //JUGADOR 2
-            }
-            //Calls reviseBoard Function so it go around all the board and check scores
-            reviseBoard();
+            playerTurn.pairs++;
+            console.log("Pares J1: ", player1.pairs, "Pares J2: ", player2.pairs);
+            playerTurn.points += turnsInARow * 100;
+            console.log("Puntos J1: ", player1.points, "Puntos J2: ", player2.points);
+            $("#points_jug1").text(JSON.stringify(player1.points));
+            $("#points_jug2").text(JSON.stringify(player2.points));
+
             //Resets "click" variables for another move
             click1 = null;
             click2 = null;
+
+            //CHEQUEAR SI LA PARTIDA TERMINÓ
             if (pairsFound === totalPairs) {
                 //If pairs Found = total Pairs it means the game is over
                 //Game Over
                 console.log("PARTIDA TERMINADA");
                 var winDiv = document.getElementById("winDiv");
-                if (pairsP1 > pairsP2) {
-
+                if (player1.pairs > player2.pairs) {
                     winDiv.innerHTML = '<h1>¡Ganó el jugador 1!</h1><span onclick="restart()">Empezar nueva partida</span>';
                     winDiv.className = "appear";
                 } else {
-                    if (pairsP1 === pairsP2) {
+                    if (player1.pairs === player2.pairs) {
                         winDiv.innerHTML = '<h1>¡Empate!</h1><span onclick="restart()">Empezar nueva partida</span>';
                         winDiv.className = "appear";
                     } else {
                         winDiv.innerHTML = '<h1>¡Ganó el jugador 2!</h1><span onclick="restart()">Empezar nueva partida</span>';
                         winDiv.className = "appear";
                     }
-
                 }
-
             }
-
-
         } else {
             //Tiles are not the same
             console.log("DISTINTAS");
+            turnsInARow = 0;
+            console.log("P1 Puntos: " + player1.points + " , turnsinarow: " + turnsInARow);
             //Disable clicks while animation returns tiles to inactivity state
             disableAll = true;
             setTimeout(function () {
@@ -128,14 +140,16 @@ function clickTile(divId) {
                 click2 = null;
                 ficha = null;
                 //change turn
-                turno = !turno;
-                if (turno === true) {
-                    h3Turno.text("Turno: Jugador 1");
+
+                turn = !turn;
+                if (turn) {
+                    h3Turn.text("Turno: Jugador 1");
                 } else {
-                    h3Turno.text("Turno: Jugador 2");
+                    h3Turn.text("Turno: Jugador 2");
                 }
                 //Another click can be made because animation is over
                 disableAll = false;
+
             }, 1500);
             //reassigned onClick function
             document.getElementById(div1).setAttribute("onClick", "clickTile('" + div1 + "')");
@@ -144,38 +158,9 @@ function clickTile(divId) {
     }
 }
 
-function reviseBoard() {
-    pairsP1 = 0;
-    pairsP2 = 0;
-    for (let i = 0; i < board.length; i++) {
-        for (let j = 0; j < board[i].length; j++) {
-            switch (board[i][j].estado) {
-                case 0:
 
-                    break;
-                case 1:
-                    //I "estado" is 1, it means the tile was founded by Player 1
-                    pairsP1++;
-                    console.log("Pairs Player 1: " + pairsP1);
-                    break;
-                case 2:
-                    //I "estado" is 2, it means the tile was founded by Player 2
-                    pairsP2++;
-                    console.log("Pairs Player 2: " + pairsP2);
-                    break;
-            }
-        }
-    }
-    //Divide by 2 because it counts "estado" for every single tiles, not by pair
-    pairsP1 = pairsP1 / 2;
-    pairsP2 = pairsP2 / 2;
-    //Show on screen
-    $("#puntos_jug1").text(JSON.stringify(pairsP1));
-    $("#puntos_jug2").text(JSON.stringify(pairsP2));
-}
 
 function myTimer(div1, div2) {
-    console.log("timer!", div1, div2)
     //Takes out the clicked class for animation
     document.getElementById(div1).setAttribute("class", "flip-box");
     document.getElementById(div2).setAttribute("class", "flip-box");
@@ -252,7 +237,7 @@ function shuffle(positions) {
 
 function hover(id) {
     //Add or removes a class depending on the player's turn for the space to show the color of the player to play
-    if (turno === true) {
+    if (turn === true) {
         document.getElementById(id).classList.toggle("turn2", false);
         document.getElementById(id).classList.toggle("turn1", true);
     } else {
@@ -273,15 +258,15 @@ function restart() {
     click2 = null;
     div1 = null;
     div2 = null;
-    turno = true;
+    turn = true;
 
-    pairsP1 = 0;
-    pairsP2 = 0;
-    pointsP1 = 0;
-    pointsP2 = 0;
-    $("#puntos_jug1").text(JSON.stringify(pairsP1));
-    $("#puntos_jug2").text(JSON.stringify(pairsP2));
-    $("#turno").text("Turno: Jugador 1");
+    player1.pairs = 0;
+    player2.pairs = 0;
+    player1.points = 0;
+    player2.points = 0;
+    $("#points_jug1").text(JSON.stringify(player1.pairs));
+    $("#points_jug2").text(JSON.stringify(player2.pairs));
+    $("#turn").text("Turno: Jugador 1");
     disableAll = false;
 
     $("#selectSize").prop('disabled', false);

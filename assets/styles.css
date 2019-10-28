@@ -154,7 +154,7 @@ img {
     overflow: hidden;
 }
 
-#turno {
+#turn {
     color: white;
     margin: 0 auto;
     font-family: Nunito, sans-serif;
@@ -244,20 +244,20 @@ img {
 
 #jugador1 {
     color: rgb(93, 166, 235);
-    ;
+    text-align: center;
 }
 
 #jugador2 {
     color: rgb(235, 93, 93);
-    ;
+    text-align: center;
 }
 
-#puntos_jug1 {
+#points_jug1 {
     text-align: center;
     font-size: 3em;
 }
 
-#puntos_jug2 {
+#points_jug2 {
     text-align: center;
     font-size: 3em;
 }
@@ -328,7 +328,7 @@ img {
     align-items: center;
 }
 
-#turno {
+#turn {
     font-size: 3em;
     color: burlywood;
 }
