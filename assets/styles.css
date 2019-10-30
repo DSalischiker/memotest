@@ -46,7 +46,17 @@ body {
 }
 
 .container div:hover {
-    background-color: #6893595c;
+    background-color: rgba(104, 147, 89, 0.041);
+}
+
+.container div.turn1:hover {
+    background-color: rgb(93, 166, 235);
+    transition: all 0.5s ease-out;
+}
+
+.container div.turn2:hover {
+    background-color: rgb(235, 93, 93);
+    transition: all 0.5s ease-out;
 }
 
 img {
@@ -150,7 +160,7 @@ img {
     margin-top: 1%;
 }
 
-#turno {
+#turn {
     color: white;
     margin: 0 auto;
     font-family: Nunito, sans-serif;
@@ -237,12 +247,22 @@ img {
     font-family: Nunito;
 }
 
-#puntos_jug1 {
+#jugador1 {
+    color: rgb(93, 166, 235);
+    text-align: center;
+}
+
+#jugador2 {
+    color: rgb(235, 93, 93);
+    text-align: center;
+}
+
+#points_jug1 {
     text-align: center;
     font-size: 3em;
 }
 
-#puntos_jug2 {
+#points_jug2 {
     text-align: center;
     font-size: 3em;
 }
@@ -313,13 +333,7 @@ img {
     align-items: center;
 }
 
-.title {
-
-    font-size: 3em;
-}
-
-#turno {
+#turn {
     font-size: 3em;
     color: burlywood;
 }
-

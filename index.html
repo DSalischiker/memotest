@@ -10,12 +10,12 @@
 </head>
 
 <body>
-    <h3 id="turno">Turno: </h3>
+    <h3 id="turn">Turno: </h3>
     <div id="winDiv" class="dissapear"></div>
     <div id="maincontainer">
         <div id="alinear">
-            <select class="select-css" id="selectSize" name="selectSize" onchange="drawBoard(this)">Seleccionar Tablero
-                <option disabled="disabled" selected="selected">Elegí nivel</option>
+            <select required class="select-css" id="selectSize" name="selectSize" onchange="drawBoard(this)">
+                <option value="" hidden>Example Placeholder</option>
                 <option value="4">4x4</option>
                 <option value="5">5x5</option>
                 <option value="6">6x6</option>
@@ -24,12 +24,12 @@
         </div>
         <div id="flex-box">
             <div id="jugador1" class="jugador">Jugador 1:
-                <p id="puntos_jug1">0</p>
+                <p id="points_jug1">0</p>
             </div>
             <div class="container">
             </div>
             <div id="jugador2" class="jugador"> Jugador 2:
-                <p id="puntos_jug2">0</p>
+                <p id="points_jug2">0</p>
             </div>
         </div>
 
