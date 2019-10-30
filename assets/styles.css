@@ -1,5 +1,4 @@
 body {
-    background-color: #599093;
     width: 94vw;
     background-image: url(./img/fondo.jpg);
     background-size: cover;
@@ -8,6 +7,7 @@ body {
     align-content: center;
     text-align: center;
     margin: 0 auto;
+    margin-top: 2%;
 }
 
 #titulo {
@@ -79,6 +79,7 @@ img {
     font-weight: 700;
     color: #444;
     line-height: 1.3;
+    cursor: pointer;
     padding: .6em 1.4em .5em .8em;
     width: 18%;
     max-width: 100%;
@@ -99,6 +100,7 @@ img {
     text-align: center;
     outline: none;
     transition: 0.3s;
+    font-family: Nunito, sans-serif;
 
 }
 
@@ -108,6 +110,7 @@ img {
 
 .select-css:hover {
     border-color: #888;
+    opacity: 0.9;
 }
 
 .select-css:focus {
@@ -124,14 +127,15 @@ img {
 
 #BotonReiniciar {
     display: block;
-    font-size: 16px;
+    font-size: 14px;
     font-family: sans-serif;
     font-weight: 700;
     color: #444;
     padding: .6em 1.4em .5em .8em;
-    width: 20%;
+    width: 18%;
     max-width: 100%;
     box-sizing: border-box;
+    cursor: pointer;
     margin: 20px;
     border: 1px solid #aaa;
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
@@ -143,6 +147,7 @@ img {
     text-align: center;
     outline: none;
     transition: 0.3s;
+    font-family: Nunito, sans-serif;
 }
 
 .container div {
@@ -172,7 +177,7 @@ img {
 }
 
 #BotonReiniciar:hover {
-    background-color: #b1d9d9;
+  opacity: 0.9;
 }
 
 #ad {
@@ -270,25 +275,25 @@ img {
 
 #points_jug1 {
     text-align: center;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 #points_jug2 {
     text-align: center;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 #winDiv {
-    z-index: 1;
-    top: 7%;
-    width: 44%;
+    z-index: 10;
+    top: 9%;
+    width: 40%;
     height: 557px;
-    padding-bottom: 2em;
-    background-color: rgba(89, 144, 147, 0.815);
-    border-radius: 1em;
+    /* padding-bottom: 1em; */
+    background-color: rgba(48, 72, 35, 0.91);
+    border-radius: 4em;
     color: white;
     position: absolute;
-    left: 28%;
+    left: 30%;
     -webkit-animation: fadein 1s;
     transition: 0.3s;
 }
@@ -309,6 +314,7 @@ img {
     font-size: 3em;
     position: absolute;
     top: 26%;
+    font-family: Nunito, sans-serif;
 }
 
 #winDiv p {
@@ -317,19 +323,29 @@ img {
 }
 
 #winDiv span {
-    background-color: white;
-    color: rgb(73, 120, 122);
+    background-color:
+    rgb(107, 145, 82);
+    color:
+    #f7f7f7;
     border-radius: 1em;
     padding: 2em;
     cursor: pointer;
     position: absolute;
     bottom: 17%;
+    transition: 0.3s;
+    box-shadow: -1px 2px 22px -2px
+    rgba(0,0,0,0.75);
+    font-family: Nunito, sans-serif;
 }
 
 #winDiv span:hover {
-    background-color: rgb(97, 186, 190);
-    color: white;
+    background-color:rgb(87, 117, 66);
+    color: #8f8c8c;
+    transform: scale(0.9);
+    font-family: Nunito, sans-serif;
+    
 }
+
 
 /* CLASSES */
 .dissapear {
