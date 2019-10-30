@@ -1,9 +1,13 @@
 body {
     background-color: #599093;
-    width: 98vw;
+    width: 94vw;
     background-image: url(./img/fondo.jpg);
     background-size: cover;
     font-family: sans-serif;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    margin: 0 auto;
 }
 
 #titulo {
@@ -27,7 +31,7 @@ body {
     padding: 1em;
     border-radius: 2em;
     font-family: 'nunito', sans-serif;
-    background-color: #4e5959;
+    background-color: #010200e6;
     color: white;
     justify-content: center;
     align-items: center;
@@ -50,12 +54,12 @@ body {
 }
 
 .container div.turn1:hover {
-    background-color: rgb(93, 166, 235);
+    background-color: rgb(255, 169, 41);
     transition: all 0.5s ease-out;
 }
 
 .container div.turn2:hover {
-    background-color: rgb(235, 93, 93);
+    background-color: rgb(200, 235, 93);
     transition: all 0.5s ease-out;
 }
 
@@ -70,13 +74,13 @@ img {
 
 .select-css {
     display: block;
-    font-size: 16px;
+    font-size: 14px;
     font-family: sans-serif;
     font-weight: 700;
     color: #444;
     line-height: 1.3;
     padding: .6em 1.4em .5em .8em;
-    width: 20%;
+    width: 18%;
     max-width: 100%;
     box-sizing: border-box;
     margin: 20px;
@@ -183,6 +187,7 @@ img {
     width: 50%;
     margin: 0 auto;
     justify-content: center;
+    margin-top: 1.5%;
 }
 
 /* FLIP */
@@ -222,7 +227,7 @@ img {
 
 /* Style the front side */
 .flip-box-front {
-    background-color: #bbb;
+    background-color: #609257;
     color: black;
 }
 
@@ -248,23 +253,29 @@ img {
 }
 
 #jugador1 {
-    color: rgb(93, 166, 235);
+    color: rgb(255, 169, 41);
     text-align: center;
+    background-color: #000000e0;
+    padding: 20px;
+    border-radius: 1em;
 }
 
 #jugador2 {
-    color: rgb(235, 93, 93);
+    color: rgb(200, 235, 93);
     text-align: center;
+    background-color: #000000e0;
+    padding: 20px;
+    border-radius: 1em;
 }
 
 #points_jug1 {
     text-align: center;
-    font-size: 3em;
+    font-size: 2em;
 }
 
 #points_jug2 {
     text-align: center;
-    font-size: 3em;
+    font-size: 2em;
 }
 
 #winDiv {
@@ -334,6 +345,17 @@ img {
 }
 
 #turn {
-    font-size: 3em;
-    color: burlywood;
+    color: white;
+    margin: 0 auto;
+    font-family: Nunito, sans-serif;
+    text-align: center;
+    margin-top: 2.5%;
+    font-size: 2em;
+}
+
+address {
+    text-align: center;
+    color: white;
+    margin-top: 1.3%;
+    font-family: Nunito, sans-serif;
 }

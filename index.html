@@ -10,9 +10,10 @@
 </head>
 
 <body>
-    <h3 id="turn">Turno: </h3>
+    
     <div id="winDiv" class="dissapear"></div>
     <div id="maincontainer">
+            
         <div id="alinear">
             <select required class="select-css" id="selectSize" name="selectSize" onchange="drawBoard(this)">
                 <option value="" hidden>Example Placeholder</option>
@@ -20,6 +21,7 @@
                 <option value="5">5x5</option>
                 <option value="6">6x6</option>
             </select>
+            <h3 id="turn">Turno: </h3>
             <button id="BotonReiniciar" onclick="restart()">Reiniciar</button>
         </div>
         <div id="flex-box">
@@ -32,12 +34,11 @@
                 <p id="points_jug2">0</p>
             </div>
         </div>
-
+        
     </div>
-
-    <address id="ad">Creado por Dieguito, Sabri, Marian y Alva</address>
+    
     <script type="text/javascript" src="assets/app.js"></script>
-
+<address>Creado por: Dieguillo, Marian, Sabri y Alva.</address>
 </body>
 
 </html>
