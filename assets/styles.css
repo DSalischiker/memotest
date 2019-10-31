@@ -75,7 +75,6 @@ img {
 .select-css {
     display: block;
     font-size: 14px;
-    font-family: sans-serif;
     font-weight: 700;
     color: #444;
     line-height: 1.3;
@@ -177,7 +176,7 @@ img {
 }
 
 #BotonReiniciar:hover {
-  opacity: 0.9;
+    opacity: 0.9;
 }
 
 #ad {
@@ -324,26 +323,25 @@ img {
 
 #winDiv span {
     background-color:
-    rgb(107, 145, 82);
+        rgb(107, 145, 82);
     color:
-    #f7f7f7;
+        #f7f7f7;
     border-radius: 1em;
     padding: 2em;
     cursor: pointer;
     position: absolute;
     bottom: 17%;
     transition: 0.3s;
-    box-shadow: -1px 2px 22px -2px
-    rgba(0,0,0,0.75);
+    box-shadow: -1px 2px 22px -2px rgba(0, 0, 0, 0.75);
     font-family: Nunito, sans-serif;
 }
 
 #winDiv span:hover {
-    background-color:rgb(87, 117, 66);
+    background-color: rgb(87, 117, 66);
     color: #8f8c8c;
     transform: scale(0.9);
     font-family: Nunito, sans-serif;
-    
+
 }
 
 
